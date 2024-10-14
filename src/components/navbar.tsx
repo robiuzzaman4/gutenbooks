@@ -5,7 +5,7 @@ const Navbar = () => {
     <header className="w-full">
       <nav className="max-w-screen-lg mx-auto px-4 bg-white pt-4">
         <div className="w-full px-4 h-16 border border-zinc-200 shadow rounded-full flex items-center justify-between gap-4">
-          <Link to="/" className="text-xl font-medium tracking-tighter">
+          <Link to="/" className="text-lg font-medium tracking-tighter">
             Guten Books
           </Link>
           <Link
