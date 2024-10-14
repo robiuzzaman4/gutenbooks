@@ -9,7 +9,7 @@ const Navbar = () => {
             Guten Books
           </Link>
           <Link
-            to="/"
+            to="/wishlist"
             className="text-sm font-normal tracking-tighter px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white"
           >
             Wishlist
