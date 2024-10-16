@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { BookmarkIcon } from "@heroicons/react/24/solid";
+
 const BookCard = ({ book }: any) => {
   return (
-    <div className="bg-white p-4 rounded-xl border border-zinc-200 shadow hover:shadow-2xl flex flex-col gap-4">
+    <div className="bg-white p-4 rounded-xl border border-zinc-200 shadow hover:shadow-2xl flex flex-col gap-4 relative">
+      {/* cover */}
       <img
         src={book?.formats["image/jpeg"]}
         alt="book cover"
         className="h-40 w-full object-cover rounded-md"
       />
+      {/* details */}
       <div className="grid gap-1">
         <h3 className="text-base font-medium tracking-tighter truncate text-zinc-700">
           {book?.title}
@@ -43,6 +47,10 @@ const BookCard = ({ book }: any) => {
           </ul>
         </span>
       </div>
+      {/* bookmark button */}
+      <button className="h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2">
+        <BookmarkIcon className="size-4 text-blue-600" />
+      </button>
     </div>
   );
 };
