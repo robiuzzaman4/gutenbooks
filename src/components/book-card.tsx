@@ -1,7 +1,39 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BookmarkIcon } from "@heroicons/react/24/solid";
+import { useEffect, useState } from "react";
+import { getWishlists } from "../utils/getWishlists";
+import toast from "react-hot-toast";
 
 const BookCard = ({ book }: any) => {
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  useEffect(() => {
+    const wishlists = getWishlists();
+    const isBookInWishlists = wishlists.some(
+      (wishlist: any) => wishlist.id === book.id
+    );
+    setIsWishlisted(isBookInWishlists);
+  }, [book.id]);
+
+  // handle toggle wishlist state and update localStorage
+  const handleToggleWishlist = () => {
+    const wishlists = getWishlists();
+    if (isWishlisted) {
+      // remove from wishlist
+      const updatedWishlists = wishlists.filter(
+        (wishlist: any) => wishlist.id !== book.id
+      );
+      localStorage.setItem("wishlists", JSON.stringify(updatedWishlists));
+      setIsWishlisted(false);
+      toast.success("Remove from wishlist");
+    } else {
+      // add to wishlist
+      const updatedWishlists = [...wishlists, book];
+      localStorage.setItem("wishlists", JSON.stringify(updatedWishlists));
+      setIsWishlisted(true);
+      toast.success("Added to wishlist");
+    }
+  };
+
   return (
     <div className="bg-white p-4 rounded-xl border border-zinc-200 shadow hover:shadow-2xl flex flex-col gap-4 relative">
       {/* cover */}
@@ -12,7 +44,9 @@ const BookCard = ({ book }: any) => {
           className="h-40 w-full object-cover rounded-md"
         />
       ) : (
-        <div className="h-40 w-full bg-zinc-200 rounded-md grid place-items-center text-center text-xl font-medium">N/A</div>
+        <div className="h-40 w-full bg-zinc-200 rounded-md grid place-items-center text-center text-xl font-medium">
+          N/A
+        </div>
       )}
       {/* details */}
       <div className="grid gap-1">
@@ -51,9 +85,16 @@ const BookCard = ({ book }: any) => {
           </ul>
         </span>
       </div>
-      {/* bookmark button */}
-      <button className="h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2">
-        <BookmarkIcon className="size-4 text-blue-600" />
+      {/* wishlist button */}
+      <button
+        onClick={handleToggleWishlist}
+        className={`h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2`}
+      >
+        <BookmarkIcon
+          className={`size-4 ${
+            isWishlisted ? "text-blue-600" : "text-zinc-200"
+          }`}
+        />
       </button>
     </div>
   );
