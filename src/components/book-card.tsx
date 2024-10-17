@@ -5,11 +5,15 @@ const BookCard = ({ book }: any) => {
   return (
     <div className="bg-white p-4 rounded-xl border border-zinc-200 shadow hover:shadow-2xl flex flex-col gap-4 relative">
       {/* cover */}
-      <img
-        src={book?.formats["image/jpeg"]}
-        alt="book cover"
-        className="h-40 w-full object-cover rounded-md"
-      />
+      {book?.formats["image/jpeg"] ? (
+        <img
+          src={book?.formats["image/jpeg"]}
+          alt="book cover"
+          className="h-40 w-full object-cover rounded-md"
+        />
+      ) : (
+        <div className="h-40 w-full bg-zinc-200 rounded-md grid place-items-center text-center text-xl font-medium">N/A</div>
+      )}
       {/* details */}
       <div className="grid gap-1">
         <h3 className="text-base font-medium tracking-tighter truncate text-zinc-700">
