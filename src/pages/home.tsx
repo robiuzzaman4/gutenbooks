@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import BookCard from "../components/book-card";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import useDebounce from "../hooks/useDebounce";
 
 const HomePage = () => {
   // api data states
@@ -10,20 +11,21 @@ const HomePage = () => {
   const [isLoading, setIsLoading] = useState(false);
   // search & page state
   const [search, setSearch] = useState("");
+  const debouncedSearch = useDebounce(search);
   const [page, setPage] = useState(1);
 
   // get books
   const getBooks = useCallback(async () => {
     setIsLoading(true);
     const res = await fetch(
-      `https://gutendex.com/books?search=${search}&page=${page.toString()}`
+      `https://gutendex.com/books?search=${debouncedSearch}&page=${page.toString()}`
     );
     const data = await res.json();
     // console.log("data", data);
 
     setBooks(data?.results);
     setIsLoading(false);
-  }, [search, page]);
+  }, [debouncedSearch, page]);
 
   // fetch data
   useEffect(() => {
