@@ -48,8 +48,6 @@ const HomePage = () => {
     return () => document.removeEventListener("mousedown", close);
   }, []);
 
-  console.log(books);
-
   return (
     <section className="max-w-screen-xl mx-auto px-4 py-20 grid gap-8">
       <h1 className="text-3xl font-medium tracking-tighter">
@@ -105,7 +103,7 @@ const HomePage = () => {
       )}
 
       {/* empty data state */}
-      {(books === undefined || books?.length <= 0) && (
+      {!isLoading && (books === undefined || books?.length <= 0) && (
         <div className="w-full my-10 flex items-center justify-center">
           <h1 className="text-xl tracking-tighter">No data found!</h1>
         </div>
