@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import { getWishlists } from "../utils/getWishlists";
 import toast from "react-hot-toast";
 
-const BookCard = ({ book }: any) => {
+type TBookCard = {
+  book: any;
+  onRemove?: (bookId: string) => void;
+};
+
+const BookCard = ({ book, onRemove }: TBookCard) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   useEffect(() => {
     const wishlists = getWishlists();
@@ -15,7 +20,7 @@ const BookCard = ({ book }: any) => {
   }, [book.id]);
 
   // handle toggle wishlist state and update localStorage
-  const handleToggleWishlist = () => {
+  const handleToggleWishlist = (id: string) => {
     const wishlists = getWishlists();
     if (isWishlisted) {
       // remove from wishlist
@@ -31,6 +36,11 @@ const BookCard = ({ book }: any) => {
       localStorage.setItem("wishlists", JSON.stringify(updatedWishlists));
       setIsWishlisted(true);
       toast.success("Added to wishlist");
+    }
+
+    // onRemove function for remove from wishlists on wishlist page
+    if (onRemove) {
+      onRemove(id);
     }
   };
 
@@ -87,12 +97,12 @@ const BookCard = ({ book }: any) => {
       </div>
       {/* wishlist button */}
       <button
-        onClick={handleToggleWishlist}
+        onClick={() => handleToggleWishlist(book?.id)}
         className={`h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2`}
       >
         <BookmarkIcon
           className={`size-4 ${
-            isWishlisted ? "text-blue-600" : "text-zinc-200"
+            isWishlisted ? "text-blue-600" : "text-zinc-500"
           }`}
         />
       </button>
