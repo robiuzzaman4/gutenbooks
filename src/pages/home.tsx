@@ -104,6 +104,13 @@ const HomePage = () => {
         </div>
       )}
 
+      {/* empty data state */}
+      {(books === undefined || books?.length <= 0) && (
+        <div className="w-full my-10 flex items-center justify-center">
+          <h1 className="text-xl tracking-tighter">No data found!</h1>
+        </div>
+      )}
+
       {/* book list */}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {!isLoading &&
