@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BookmarkIcon } from "@heroicons/react/24/solid";
 import { useEffect, useState } from "react";
 import { getWishlists } from "../utils/getWishlists";
 import toast from "react-hot-toast";
+import { Book } from "../types";
 
 type TBookCard = {
-  book: any;
-  onRemove?: (bookId: string) => void;
+  book: Book;
+  onRemove?: (bookId: number) => void;
 };
 
 const BookCard = ({ book, onRemove }: TBookCard) => {
@@ -14,18 +14,18 @@ const BookCard = ({ book, onRemove }: TBookCard) => {
   useEffect(() => {
     const wishlists = getWishlists();
     const isBookInWishlists = wishlists.some(
-      (wishlist: any) => wishlist.id === book.id
+      (wishlist: Book) => wishlist.id === book.id
     );
     setIsWishlisted(isBookInWishlists);
   }, [book.id]);
 
   // handle toggle wishlist state and update localStorage
-  const handleToggleWishlist = (id: string) => {
+  const handleToggleWishlist = (id: number) => {
     const wishlists = getWishlists();
     if (isWishlisted) {
       // remove from wishlist
       const updatedWishlists = wishlists.filter(
-        (wishlist: any) => wishlist.id !== book.id
+        (wishlist: Book) => wishlist.id !== book.id
       );
       localStorage.setItem("wishlists", JSON.stringify(updatedWishlists));
       setIsWishlisted(false);

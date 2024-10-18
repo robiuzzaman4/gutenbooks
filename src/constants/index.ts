@@ -23,4 +23,5 @@ export const topics = [
   "Feminist Fiction",
   "Social Class Fiction",
   "Historical Romance",
+  "Children",
 ];

@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useRef, useState } from "react";
 import BookCard from "../components/book-card";
 import { ArrowPathIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import useDebounce from "../hooks/useDebounce";
 import { topics } from "../constants";
+import { Book } from "../types";
 
 const HomePage = () => {
   // api data states
@@ -16,29 +16,32 @@ const HomePage = () => {
   const [filter, setFilter] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [page, setPage] = useState(1);
-
-  // drop down ref
-  const dropDownRef = useRef(null);
+  // dropdown ref
+  const dropDownRef = useRef<HTMLDivElement>(null);
 
   // get books
   const getBooks = useCallback(async () => {
     setIsLoading(true);
     const res = await fetch(
-      `https://gutendex.com/books?search=${debouncedSearch}&page=${page.toString()}`
+      `https://gutendex.com/books?search=${debouncedSearch}&page=${page.toString()}&topic=${filter}`
     );
     const data = await res.json();
     setBooks(data?.results);
     setIsLoading(false);
-  }, [debouncedSearch, page]);
+  }, [debouncedSearch, page, filter]);
 
   // fetch data
   useEffect(() => {
     getBooks();
-  }, [getBooks, search]);
+  }, [getBooks, search, page, filter]);
 
+  // close dropdown on outside click
   useEffect(() => {
-    const close = (e: any) => {
-      if (dropDownRef?.current && !dropDownRef?.current?.contains(e?.target))
+    const close = (e: MouseEvent) => {
+      if (
+        dropDownRef?.current &&
+        !dropDownRef?.current?.contains(e?.target as Node)
+      )
         setIsFilterOpen(false);
     };
     document.addEventListener("mousedown", close);
@@ -94,20 +97,20 @@ const HomePage = () => {
       </div>
 
       {/* loader */}
-      {/* {isLoading && (
+      {isLoading && (
         <div className="flex items-center justify-center gap-1 mx-auto w-fit text-zinc-500">
           <ArrowPathIcon className="size-4 animate-spin" />
           <p className="text-sm">Loading..</p>
         </div>
-      )} */}
+      )}
 
       {/* book list */}
-      {/* <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {!isLoading &&
           books &&
           books?.length > 0 &&
-          books?.map((book: any) => <BookCard key={book?.id} book={book} />)}
-      </div> */}
+          books?.map((book: Book) => <BookCard key={book?.id} book={book} />)}
+      </div>
 
       {/* pagination */}
       <div className="flex items-center gap-2 justify-end">
