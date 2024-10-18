@@ -21,4 +21,4 @@
 - **Vite - For development server**
 - **Netlify - For deployment**
 
-### **Live Link: [https://v0-stickynotes.netlify.app](https://v0-stickynotes.netlify.app)**
+### **Live Link: [https://gutenebooks.netlify.app/](https://gutenebooks.netlify.app/)**
