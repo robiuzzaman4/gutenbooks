@@ -27,6 +27,14 @@ const WishlistPage = () => {
         Wishlisted Books:
       </h1>
 
+      {wishlistedBooks?.length <= 0 && (
+        <div className="w-full my-10 flex items-center justify-center">
+          <h1 className="text-xl tracking-tighter">
+            Your wishlist is empty!
+          </h1>
+        </div>
+      )}
+
       {/* wishlisted books */}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {wishlistedBooks &&
