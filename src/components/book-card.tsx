@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getWishlists } from "../utils/getWishlists";
 import toast from "react-hot-toast";
 import { Book } from "../types";
+import { Link } from "react-router-dom";
 
 type TBookCard = {
   book: Book;
@@ -95,10 +96,19 @@ const BookCard = ({ book, onRemove }: TBookCard) => {
           </ul>
         </span>
       </div>
+
+      {/* view details button */}
+      <Link
+        to={`/books/${book?.id}`}
+        className="button-solid w-full mt-auto flex items-center justify-center"
+      >
+        View Details
+      </Link>
+
       {/* wishlist button */}
       <button
         onClick={() => handleToggleWishlist(book?.id)}
-        className={`h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2`}
+        className={`h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2 z-50`}
       >
         <BookmarkIcon
           className={`size-4 ${
