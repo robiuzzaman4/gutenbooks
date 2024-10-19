@@ -100,7 +100,7 @@ const BookCard = ({ book, onRemove }: TBookCard) => {
       {/* view details button */}
       <Link
         to={`/books/${book?.id}`}
-        className="button-solid w-full mt-auto flex items-center justify-center"
+        className="button-secondary w-full mt-auto flex items-center justify-center"
       >
         View Details
       </Link>

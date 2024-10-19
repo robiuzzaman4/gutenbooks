@@ -122,14 +122,14 @@ const HomePage = () => {
         <p className="text-sm text-zinc-500">Showing Page: {page}</p>
         <span className="flex items-center gap-2">
           <button
-            className="button-solid"
+            className="button-primary"
             onClick={() => setPage((prev) => prev - 1)}
             disabled={page === 1 || isLoading}
           >
             Previous
           </button>
           <button
-            className="button-solid"
+            className="button-primary"
             onClick={() => setPage((prev) => prev + 1)}
             disabled={isLoading}
           >

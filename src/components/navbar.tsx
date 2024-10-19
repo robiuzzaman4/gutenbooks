@@ -8,7 +8,7 @@ const Navbar = () => {
           <Link to="/" className="text-lg font-medium tracking-tighter">
             Guten Books
           </Link>
-          <Link to="/wishlist" className="button-solid">
+          <Link to="/wishlist" className="button-primary">
             Wishlist
           </Link>
         </div>
