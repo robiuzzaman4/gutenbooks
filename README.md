@@ -21,4 +21,6 @@
 - **Vite - For development server**
 - **Netlify - For deployment**
 
-### **Live Link: [https://gutenebooks.netlify.app/](https://gutenebooks.netlify.app/)**
+### **Live Link: [https://gutenebooks.netlify.app/](https://gutenebooks.netlify.app)**
+
+#### **Note: This application use gutendex free public api. So it might be take too much time to fetch data.**
