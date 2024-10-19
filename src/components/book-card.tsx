@@ -108,7 +108,7 @@ const BookCard = ({ book, onRemove }: TBookCard) => {
       {/* wishlist button */}
       <button
         onClick={() => handleToggleWishlist(book?.id)}
-        className={`h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2 z-50`}
+        className={`h-9 w-9 rounded-full bg-white grid place-items-center border border-gray-200 absolute top-2 right-2`}
       >
         <BookmarkIcon
           className={`size-4 ${
